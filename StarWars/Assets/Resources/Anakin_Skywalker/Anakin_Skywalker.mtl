@@ -1,0 +1,55 @@
+# 
+# 
+
+newmtl AnakinEye
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd Anakin_Eye_D.tga
+
+newmtl AnakinEyereflect
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd Anakin_Eye_Reflection_D.tga
+
+newmtl AnakinMouth
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd Anakin_Mouth_D.tga
+map_Bump \Anakin_Mouth_N.tga
+map_Ka \Anakin_Mouth_O.tga
+map_d \Anakin_Mouth_D.tga
+
+newmtl Anakinclothes
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd Anakin_clothes_d.tga
+
+newmtl Anakinhead
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd Anakin_head_d.tga
