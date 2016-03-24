@@ -1,57 +1,54 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class MoveAnimation : MonoBehaviour
 {
+    private Animator _animator;
+    private float _verticalInput;
+    private float _horizontalInput;
+    private float _rotateSpeed = 10f;
+    private bool _runing;
+    private bool _moving;
+    private bool _jump;
 
-    Animator animator; //stores the animator component
-
-     Animation attack ;
-    float v; //vertical movements
-
-    float h; //horizontal movements
-    int[] stateHashes = new int[5];
-    float sprint;
-    float rotateSpeed = 10f;
-    void Start()
+    private void Start()
     {
-
-        animator = GetComponent<Animator>(); //assigns Animator component when we start the game
-       
+        //Inicialization
+        this._animator = GetComponent<Animator>();
     }
 
-    void Update()
+    private void Update()
     {
-this.Attack();
-        v = Input.GetAxis("Vertical");
-        h = Input.GetAxis("Horizontal");
-      
-        
-       
-transform.Rotate(0f, Input.GetAxis("Mouse X") * rotateSpeed, 0f);
+        //Getting input 
+        this._verticalInput = Input.GetAxis("Vertical");
+        this._horizontalInput = Input.GetAxis("Horizontal");
+        this._runing = Input.GetButton("Sprint");
+        this.transform.Rotate(0f, Input.GetAxis("Mouse X") * this._rotateSpeed, 0f);
+        this._jump = Input.GetButtonDown("Jump");
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-
-        //set the "Walk" parameter to the v axis value
-        animator.SetFloat("Walk", v);
-        animator.SetFloat("Turn", h);
-
+        if (this._runing && (this._verticalInput > 0 || this._verticalInput < 0))
+        {
+            //You cant steer while sprinting
+            this._verticalInput *= 2;
+            this._horizontalInput = 0;
+        }
+        if (this._verticalInput > 0 || this._verticalInput < 0 || this._horizontalInput > 0 || this._horizontalInput < 0)
+            this._moving = true;
+        else this._moving = false;
+        Animate();
     }
 
-    void Attack()
+    private void Animate()
     {
-         if (Input.GetMouseButtonDown(0))
-         {
-            this.animator.SetFloat("Attack" , 1.0f);
-         }
-         if (Input.GetMouseButtonUp(0))
-         {
-             this.animator.SetFloat("Attack", 0.0f);
-         }
-       
-        
+        if (this._jump)
+        {
+            this._animator.SetTrigger("Jump");
+            this._jump = false;
+        }
+        this._animator.SetBool("Moving", this._moving);
+        this._animator.SetFloat("InputY", this._verticalInput);
+        this._animator.SetFloat("InputX", this._horizontalInput);
     }
-    
 }
