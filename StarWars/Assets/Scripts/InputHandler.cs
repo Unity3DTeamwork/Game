@@ -13,7 +13,7 @@ public class InputHandler : MonoBehaviour
 
 	void Update ()
 	{
-        VerticalInput = Input.GetAxis("Vertical");
+        VerticalInput = Input.GetAxis("Vertical") / 3; 
         HorizontalInput = Input.GetAxis("Horizontal");
         Sprinting = Input.GetButton("Sprint") && VerticalInput != 0;
         Jumping = Input.GetButtonDown("Jump");
