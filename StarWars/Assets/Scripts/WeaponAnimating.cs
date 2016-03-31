@@ -1,57 +1,59 @@
 ﻿using UnityEngine;
 
-public class WeaponAnimating : MonoBehaviour
+namespace Assets.Scripts
 {
-    [SerializeField] private Transform _pants;
-    [SerializeField] private Transform _hand;
-    [SerializeField] private Transform _lightSaber;
-
-    private Animator _anim;
-    private bool _armed;
-    private bool _moving;
-    private bool _attacking;
-    private GameObject _lightsaberBlade;
-
-    private void Start()
+    public class WeaponAnimating : MonoBehaviour
     {
-        this._anim = GetComponent<Animator>();
-        this._armed = true;
-        this._anim.SetBool("Armed", this._armed);
-        this._lightsaberBlade = this._lightSaber.GetChild(0).gameObject;
-    }
+        [SerializeField]
+        private Transform _pants;
+        [SerializeField]
+        private Transform _hand;
+        [SerializeField]
+        private Transform _lightSaber;
 
-    private void Update()
-    {
-        if (InputHandler.Arming && !this._attacking && !this._moving)
+        private Animator _anim;
+        private GameObject _lightsaberBlade;
+
+        private void Start()
         {
-            this._armed = !this._armed;
-            this._anim.SetTrigger(this._armed ? "Arming" : "Disarming");
-            this._anim.SetBool("Armed", this._armed);
-            this._moving = true;
+            this._anim = GetComponent<Animator>();
+            this._anim.SetBool("Armed", Character.Armed);
+            this._lightsaberBlade = this._lightSaber.GetChild(0).gameObject;
         }
-        if (!InputHandler.Attacking || this._attacking || !this._armed || this._moving) return;
-        this._attacking = true;
-        this._anim.SetTrigger("Attack");
-    }
 
-    public void FinishedAttacking()
-    {
-        this._attacking = false;
-    }
+        private void Update()
+        {
+            if (InputHandler.Arm && !Character.Attacking && Character.Grounged && !Character.Arming && !Character.Jumping)
+            {
+                Character.Armed = !Character.Armed;
+                this._anim.SetTrigger(Character.Armed ? "Arm" : "Disarm");
+                this._anim.SetBool("Armed", Character.Armed);
+                Character.Arming = true;
+            }
+            if (!InputHandler.Attack || Character.Attacking || !Character.Armed || Character.Jumping || Character.Arming)
+                return;
+            Character.Attacking = true;
+            this._anim.SetTrigger("Attack");
+        }
+        public void FinishedAttacking()
+        {
+            Character.Attacking = false;
+        }
 
-    public void FinishedArmingDisarming()
-    {
-        this._moving = false;
-    }
+        public void FinishedArmingDisarming()
+        {
+            Character.Arming = false;
+        }
 
-    public void GetLeaveLightsaber()
-    {
-        this._lightSaber.SetParent(this._lightSaber.parent == this._hand ? this._pants : this._hand);
-        this._lightSaber.localPosition = Vector3.zero;
-        this._lightSaber.localRotation = Quaternion.identity;
-    }
-    public void TurnLightsaberOnOff()
-    {
-        this._lightsaberBlade.SetActive(!this._lightsaberBlade.activeSelf);
+        public void GetLeaveLightsaber()
+        {
+            this._lightSaber.SetParent(this._lightSaber.parent == this._hand ? this._pants : this._hand);
+            this._lightSaber.localPosition = Vector3.zero;
+            this._lightSaber.localRotation = Quaternion.identity;
+        }
+        public void TurnLightsaberOnOff()
+        {
+            this._lightsaberBlade.SetActive(!this._lightsaberBlade.activeSelf);
+        }
     }
 }

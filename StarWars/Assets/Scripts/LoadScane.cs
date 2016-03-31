@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections;
-
 using UnityEngine.SceneManagement;
 
-public class LoadScane : MonoBehaviour {
+namespace Assets.Scripts
+{
+    public class LoadScane : MonoBehaviour {
 
-    public void Load(int scene)
-    {
-        SceneManager.LoadScene(scene);
-    }
+        public void Load()
+        {
+            SceneManager.LoadScene("GameScene");
+        }
 
-    public void Exit()
-    {
-        Application.Quit();
-        Debug.Log("Exit");
+        public void Exit()
+        {
+            Application.Quit();
+            Debug.Log("Exit");
+        }
     }
 }

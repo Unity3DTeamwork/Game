@@ -1,39 +1,34 @@
 ﻿using UnityEngine;
-using System.Collections;
-
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+namespace Assets.Scripts
 {
-    private bool isOver = false;
-
-    private Image image;
-
-    void Start()
+    public class Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-          this.image = this.GetComponentInChildren<Image>();
-    }
-    void Update()
-    {
-        if (isOver)
+        private bool _isOver = false;
+
+        private Image _image;
+
+        private void Start()
         {
-            this.image.enabled = true;
+            this._image = this.GetComponentInChildren<Image>();
         }
-        else
+
+        private void Update()
         {
-            this.image.enabled = false;
+            this._image.enabled = this._isOver;
         }
-    }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    { 
-        isOver = true;
-    }
+        public void OnPointerEnter(PointerEventData eventData)
+        { 
+            this._isOver = true;
+        }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
+        public void OnPointerExit(PointerEventData eventData)
+        {
       
-        isOver = false;
+            this._isOver = false;
+        }
     }
 }

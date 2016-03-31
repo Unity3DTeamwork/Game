@@ -1,4 +1,4 @@
 sceneSetups:
-- path: D:/Lichni/Dimi/Softuni/OpenCourses/Unity3D/Proects/StarWars/Assets/Scenes/MainMenu.unity
+- path: Assets/Scenes/GameScene.unity
   isLoaded: 1
   isActive: 1

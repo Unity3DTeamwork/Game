@@ -1,28 +1,30 @@
 ﻿using UnityEngine;
 
-public class InputHandler : MonoBehaviour
+namespace Assets.Scripts
 {
-    public static bool Arming;
-    public static bool Sprinting;
-    public static bool Jumping;
-    public static bool Attacking;
-    public static float VerticalInput;
-    public static float HorizontalInput;
-    public static float MouseXAxis;
-    public static float MouseYAxis;
+    public class InputHandler : MonoBehaviour
+    {
+        public static float VerticalInput;
+        public static float HorizontalInput;
+        public static float MouseXAxis;
+        public static float MouseYAxis;
+        public static bool Sprint;
+        public static bool Jump;
+        public static bool Arm;
+        public static bool Attack;
 
-	void Update ()
-	{
-        VerticalInput = Input.GetAxis("Vertical") / 3; 
-        HorizontalInput = Input.GetAxis("Horizontal");
-        Sprinting = Input.GetButton("Sprint") && VerticalInput != 0;
-        Jumping = Input.GetButtonDown("Jump");
-	    Arming = Input.GetButtonDown("Arming");
-	    Attacking = Input.GetMouseButtonDown(0);
-	    MouseXAxis = Input.GetAxis("Mouse X");
-	    MouseYAxis = Input.GetAxis("Mouse Y");
-	    if (!Sprinting) return;
-	    VerticalInput *= 2;
-	    HorizontalInput = 0;
-	}
+
+        private void Update()
+        {
+            Sprint = Input.GetButton("Sprint");
+            Jump = Input.GetButtonDown("Jump");
+            Arm = Input.GetButtonDown("Arm");
+            Attack = Input.GetMouseButtonDown(0);
+            MouseXAxis = Input.GetAxis("Mouse X");
+            MouseYAxis = Input.GetAxis("Mouse Y");
+            VerticalInput = Input.GetAxis("Vertical");
+            HorizontalInput = Input.GetAxis("Horizontal");
+        
+        }
+    }
 }
