@@ -8,6 +8,9 @@ namespace Assets.Scripts
     {
         private bool _isOver = false;
 
+        public AudioSource sound;
+        
+
         private Image _image;
 
         private void Start()
@@ -18,6 +21,11 @@ namespace Assets.Scripts
         private void Update()
         {
             this._image.enabled = this._isOver;
+            if (!sound.isPlaying)
+            {
+                this.sound.enabled = this._isOver;
+
+            }
         }
 
         public void OnPointerEnter(PointerEventData eventData)
