@@ -26,7 +26,7 @@ public class Collisions : MonoBehaviour {
           
             if (this.playerHealth <=0)
             {
-                SceneManager.LoadScene("GameScene");
+                SceneManager.LoadScene("GameOver");
             }
            
             Debug.Log("Player hit");
